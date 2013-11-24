@@ -328,15 +328,21 @@ public class AnalyzeJimpleClass {
 				
 				// This is an overridden system method. Check that we don't have
 				// one of the lifecycle methods as they are treated separately.
+			
 				if (classType == ClassType.Activity
 							&& AndroidEntryPointConstants.getActivityLifecycleMethods().contains(method.getSubSignature()))
 						continue;
+				
+				/**
+				 *@author Dieter Hofmann: system callback with intent as parameter has to be considered for the intra component communication  
+				 */
 				if (classType == ClassType.Service
-						&& AndroidEntryPointConstants.getServiceLifecycleMethods().contains(method.getSubSignature()))
+						&& (AndroidEntryPointConstants.SERVICE_ONUNBIND.equals(method.getSubSignature())
+							||AndroidEntryPointConstants.SERVICE_ONDESTROY.equals(method.getSubSignature())))
 					continue;
-				if (classType == ClassType.BroadcastReceiver
-						&& AndroidEntryPointConstants.getBroadcastLifecycleMethods().contains(method.getSubSignature()))
-					continue;
+//				if (classType == ClassType.BroadcastReceiver
+//						&& AndroidEntryPointConstants.getBroadcastLifecycleMethods().contains(method.getSubSignature()))
+//					continue;
 				if (classType == ClassType.ContentProvider
 						&& AndroidEntryPointConstants.getContentproviderLifecycleMethods().contains(method.getSubSignature()))
 					continue;

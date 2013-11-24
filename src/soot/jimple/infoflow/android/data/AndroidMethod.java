@@ -67,7 +67,7 @@ public class AndroidMethod extends SootMethodAndClass{
 		SYSTEM_SETTINGS,
 		IMAGE,
 		BROWSER_INFORMATION,
-		NFC
+		NFC, INTER_COMPONENT_COMMUNICATION
 	}
 
 	private final Set<String> permissions;
